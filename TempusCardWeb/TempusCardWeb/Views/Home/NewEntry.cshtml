@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "NewEntry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+        <div><br /></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> Timesheet Entry </div>
+                    <div class="panel-body">
+                        <div>
+                            <form id="addManualEntry" class="form-horizontal" action="/hr/addTimeSheetEntry" method="post">
+                                <input type="hidden" class="form-control" id="id" name="id" value="" />
+
+
+                                <br />
+                                <input type="hidden" class="form-control" id="defaultMaxHoursPerTask" value="2:00" />
+                                <input type="hidden" class="form-control" id="defaultMaxHoursPerDay" value="12:00" />
+
+                                <input type="hidden" class="form-control" id="dateFormat" name="dateFormat" value="MM/dd/yyyy" />
+                                <input type="hidden" class="form-control" id="dueDays" name="dueDays" value="30" />
+                                <input type="hidden" class="form-control" id="maxHours" name="maxHours" value="2:00" />
+                                <input type="hidden" class="form-control" id="maxHoursRestrict" name="maxHoursRestrict" value="Y" />
+                                <input type="hidden" class="form-control" id="maxHoursWarn" name="maxHoursWarn" value="Y" />
+                                <input type="hidden" class="form-control" id="dayMaxHours" name="dayMaxHours" value="" />
+                                <input type="hidden" class="form-control" id="dayMaxHoursRestrict" name="dayMaxHoursRestrict" value="Y" />
+                                <input type="hidden" class="form-control" id="dayMaxHoursWarn" name="dayMaxHoursWarn" value="Y" />
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label ">Date <font color="red">*</font></label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group date" id="datepicker1">
+                                                    <input type="text" class="form-control" readonly="readonly" id="date" name="date" value="05/21/2020" />
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Project Name <font color="red">*</font></label>
+                                            <div class="col-sm-9">
+                                                <select name="projectId" class="form-control" id="pickProjectId" required="required">
+                                                    <option value="">-- Select --</option>
+                                                    <option value="56330611986c2d76b45147f8">Research and Development</option>
+                                                    <option value="5a1583ce63890575650883ac">TAR -Team</option>
+                                                    <option value="5633059d986c2d76b45147f6">Verudix Internal</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label ">Task Name <font color="red">*</font></label>
+                                            <div class="col-sm-9">
+                                                <input onkeypress="return noenter()" type="text" id="tsTask1" class="form-control" required="required" name="name" value="" />
+                                                <span class="help-block" id="name_error_msg"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label ">Task Description <font color="red">*</font></label>
+                                            <div class="col-sm-9">
+                                                <textarea class=" no-resize bold-border form-control" required="required" id="tsActivity1" name="description"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group hoursClock">
+                                            <label class="col-sm-3 control-label">Hours Spent <font color="red">*</font></label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="HH:MM" id="hoursSpent" name="hoursSpent" value="" />
+                                                <span class="help-block" id="error_msg"></span>
+                                                <span class="text-warning" id="info_msg"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label ">Task Type <font color="red">*</font></label>
+                                            <div class="col-sm-8">
+                                                <div class="dropdown">
+                                                    <select name="typeId" id="taskType" class="form-control" required="required">
+                                                        <option value="">-- Select --</option>
+                                                        <option value="3">Large</option>
+                                                        <option value="2">Medium</option>
+                                                        <option value="1">Small</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Task Priority <font color="red">*</font></label>
+                                            <div class="col-sm-8">
+                                                <select name="priorityId" id="taskPriority" required="required" class=" form-control">
+                                                    <option value="">-- Select --</option>
+                                                    <option value="3">High</option>
+                                                    <option value="1">Low</option>
+                                                    <option value="2">Medium</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label ">Task Status <font color="red">*</font></label>
+                                            <div class="col-sm-8">
+                                                <select name="statusId" id="status" class="form-control" required="required">
+                                                    <option value="">-- Select --</option>
+                                                    <option value="3">Completed</option>
+                                                    <option value="2">In Progress</option>
+                                                    <option value="1">Started</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Dependency</label>
+                                            <div class="col-sm-8">
+                                                <select name="dependency" data-placeholder="Choose dependency" id="chooseEmployeeId" class="chosen-select form-control" tabindex="5" multiple="multiple"></select><input type="hidden" name="_dependency" value="1" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="input-group pull-right" style="margin-right:45px;">
+                                            <a class="btn btn-danger" type="button" style="margin-right:10px;" href="/hr/dashboard">Cancel </a>
+
+                                            <button class="btn btn-warning reset" type="button" style="margin-right:10px;">Clear</button>
+                                            <button class="btn btn-primary" id="btnSaveTask" type="submit">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+<script type="text/javascript" src="~/resources/plugins/bootstrap-clockpicker.js"></script>
+<script src="~/resources/js/hr.js"></script>
+<script src="~/resources/js/timesheet.js"></script>
+<script type="text/javascript">
+    	function noenter() {
+    	  return !(window.event.keyCode == 13);
+		}
+</script>
+

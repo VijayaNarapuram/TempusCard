@@ -1,0 +1,287 @@
+﻿
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>TempusCard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="~/resources/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/resources/css/style.css" />
+    <link rel="stylesheet" href="~/resources/css/style-responsive.css" />
+    <link rel="stylesheet" href="~/resources/plugins/weather-icons.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/prettify.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/magnific-popup.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/owl.theme.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/owl.transitions.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/chosen.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/prism.css" />
+    <link rel="stylesheet" href="~/resources/plugins/all.css" />
+    <link rel="stylesheet" href="~/resources/plugins/bootstrap-timepicker.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/formValidation.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/summernote.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/bootstrap-markdown.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/bootstrap.datatable.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/morris.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/slider.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/salvattore.css" />
+    <link rel="stylesheet" href="~/resources/plugins/toastr.css" />
+    <link rel="stylesheet" href="~/resources/plugins/fullcalendar.css" />
+    <link rel="stylesheet" media="print" href="~/resources/plugins/fullcalendar.print.css" />
+    <link rel="stylesheet" href="~/resources/plugins/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="~/resources/plugins/bootstrap-clockpicker.css" />
+    @RenderSection("PagespecificCss", required: false)
+</head>
+<body onload="handleDateForamtForTimesheet()">
+
+
+    <div>
+        <!-- BEGIN TOP NAV -->
+        <div class="top-navbar">
+            <div class="top-navbar-inner">
+                <div class="logo-brand">
+                    <a href="/hr/dashboard">
+                        <img width="90px" height="40px" class="logo" alt="Logo" src="~/resources/img/vtimes-login.png" />
+                    </a>
+                </div>
+                <div class="top-nav-content">
+                    <div class="btn-collapse-sidebar-left"> <i class="fa fa-bars"></i> </div>
+                    <div class="btn-collapse-nav" data-toggle="collapse" data-target="#main-fixed-nav">
+                        <i class="fa fa-plus icon-plus"></i>
+                    </div>
+                    <div class="collapse navbar-collapse" id="main-fixed-nav">
+                        <ul class="nav navbar-nav navbar-left">
+                            <!-- Begin nav notification -->
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-bell fa-lg"></i>
+                                    <span id="notificationsCount" class="badge badge-danger icon-count" style="top:3px;">1</span>
+                                </a>
+                                <ul class="dropdown-menu square with-triangle">
+                                    <li>
+                                        <div class="nav-dropdown-heading">
+                                            Notifications
+                                        </div>
+                                        <div class="nav-dropdown-content scroll-nav-dropdown " style="min-height:10px;height:auto !important; max-height:350px;">
+                                            <ul>
+                                                <li class="unread">
+                                                    <a href="#" data-target="#NotificationModal" data-toggle="modal" onclick="javascript:updateNotificationStatus;">
+                                                        <img class="absolute-left-content" alt="Avatar" src="~/resources/img/notifications.png" />
+                                                        <strong>Alert</strong>
+                                                        <span class="small-caps">4 years ago</span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+
+                                        </div>
+                                        <a href="/hr/notificationsReport"><button class="btn btn-primary btn-sm btn-square btn-block"> View All</button></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="">
+                            <div class="form-group">
+                                <input type="hidden" name="loggedInDate" id="loggedInDate" value="21/05/2020 13:14:07" />
+                                <input type="hidden" name="timeZone" id="timeZone" value="Asia/Kolkata" />
+                                <input type="hidden" name="org_Name" id="org_Name" value="" />
+                                <input type="hidden" name="app_path" id="app_path" value="/hr" />
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="nav-user navbar-right">
+                        <li class="dropdown">
+                            <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown" title="Account">  <img class="avatar img-circle" alt="Avatar" src="~/resources/img/user.png" /> <strong>Hi,&nbsp;<span>Sruti B</span></strong> &nbsp; <i class="fa fa-sort-desc"></i> </a>
+                            <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
+                                <li> <a href="/hr/userProfile">Profile</a> </li>
+                                <li> <a href="/hr/changePassword">Change Password</a> </li>
+                                <li class="divider"></li>
+                                <li> <a href="/hr/logout">Log out</a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal fade" id="NotificationModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary no-border" style="padding: 6px">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">
+                            Notification Details
+                        </h4>
+                    </div>
+                    <div id="notification" class="modal-body">
+                        <form role="form">
+                            <label id="notificationId" style="display: none"> </label>
+                            <div class="form-group">
+                                From Date
+                                <p style="font-weight:bold;" class="form-control" id="fromDate" readonly="readonly"></p>
+                            </div>
+                            <div class="form-group">
+                                To Date
+                                <p style="font-weight:bold;" class="form-control" id="toDate" readonly="readonly"></p>
+                            </div>
+                            <div class="form-group">
+                                Notification name
+                                <p style="font-weight:bold;" class="form-control" id="name" readonly="readonly"></p>
+                            </div>
+                            <div class="form-group">
+                                Type
+                                <p style="font-weight:bold;" class="form-control" id="type" readonly="readonly"></p>
+                            </div>
+                            <div class="form-group">
+                                Description
+                                <textarea style="font-weight:bold;" class="form-control" readonly="readonly" id="description"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="closeButton" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                    <!-- /.modal-footer -->
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-doalog -->
+        </div>
+        <!-- END TOP NAV -->
+        <!-- BEGIN SIDEBAR LEFT -->
+        <div class="sidebar-left sidebar-nicescroller">
+            <ul class="sidebar-menu">
+
+
+                <!-- EMPLOYEE OPERATIONS -->
+                <li class="active open">
+                    <a href="#"><i class="fa fa-clock-o icon-sidebar"></i><i class="fa fa-angle-right chevron-icon-sidebar"></i> Timesheet </a>
+                    <ul class="submenu">
+                        <li class="active"> <a href="/hr/addTimeSheetEntry">New Entry</a> </li>
+                        <li> <a href="/hr/timeSheet">Report</a> </li>
+                        <li> <a href="/hr/weeklyTimeSheet">Weekly Timesheet</a> </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/hr/projects"> <i class="fa fa-files-o icon-sidebar"></i> <span class="label label-info span-sidebar"></span> Projects </a>
+                </li>
+                <li>
+                    <a href="/hr/leaveRequest"> <i class="fa fa-pencil-square-o icon-sidebar"></i> <span class="label label-info span-sidebar"></span> Leave Requests </a>
+                </li>
+                <li>
+                    <a href="/hr/viewPaySlip"><i class="fa fa-file-powerpoint-o icon-sidebar"></i> <span class="label label-info span-sidebar"></span>View Payslip	</a>
+                </li>
+                <li>
+                    <a href="/hr/calendar"> <i class="fa fa-calendar icon-sidebar"></i> <span class="label label-info span-sidebar"></span> Calendar </a>
+                </li>
+                <li>
+                    <a href="/hr/notificationsReport"> <i class="fa fa-bell icon-sidebar"></i> <span class="label label-info span-sidebar"></span> Notifications </a>
+                </li>
+
+
+
+                <!-- MANAGER OPERATIONS -->
+                <!-- ADMIN OPERATIONS -->
+                <!-- SUPERADMIN OPERATIONS -->
+
+
+
+
+
+            </ul>
+        </div>
+        <!-- END SIDEBAR LEFT -->
+        <!-- BEGIN SIDEBAR RIGHT HEADING -->
+        <div class="sidebar-right-heading">
+            <ul class="nav nav-tabs square nav-justified">
+                <li class="active">
+                    <a href="#online-user-sidebar" data-toggle="tab"> <i class="fa fa-comments"></i> </a>
+                </li>
+                <li>
+                    <a href="#notification-sidebar" data-toggle="tab"> <i class="fa fa-bell"></i> </a>
+                </li>
+                <li>
+                    <a href="#task-sidebar" data-toggle="tab"> <i class="fa fa-tasks"></i> </a>
+                </li>
+                <li>
+                    <a href="#setting-sidebar" data-toggle="tab"> <i class="fa fa-cogs"></i> </a>
+                </li>
+            </ul>
+        </div>
+        <!-- END SIDEBAR RIGHT HEADING -->
+        <div class="page-content">
+            <div class="container-fluid">
+                            @RenderBody()
+                        </div>
+                    </div>
+               
+            
+        <div id="loader">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+        <script type="text/javascript" src="~/resources/js/jquery.min.js"></script>
+        <script type="text/javascript" src="~/resources/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="~/resources/js/time.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/retina.min.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/jquery.nicescroll.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/jquery.slimscroll.min.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/jquery.backstretch.min.js"></script>
+        <!-- PLUGINS -->
+        <script type="text/javascript" src="~/resources/plugins/skycons.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/prettify.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/jquery.magnific-popup.min.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/chosen.jquery.min.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/icheck.min.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/bootstrap-timepicker.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/jquery.mask.min.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/formValidation.min.js"></script>
+        <script type="text/javascript" src="~/resources/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/bootstrap.datatable.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/summernote.min.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/markdown.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/to-markdown.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/bootstrap-markdown.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/bootstrap-slider.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/toastr.js"></script>
+        <!-- FULL CALENDAR JS -->
+        <script type="text/javascript" src="~/resources/plugins/jquery-ui.custom.min.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/fullcalendar.min.js"></script>
+        <script type="text/javascript" src="~/resources/js/full-calendar.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/easypiechart.min.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/jquery.easypiechart.min.js"></script>
+        <!-- KNOB JS -->
+        <script type="text/javascript" src="~/resources/plugins/excanvas.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/jquery.knob.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/knob.js"></script>
+        <!-- FLOT CHART JS -->
+        <script type="text/javascript" src="~/resources/plugins/jquery.flot.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/jquery.flot.tooltip.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/jquery.flot.resize.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/jquery.flot.selection.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/jquery.flot.stack.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/jquery.flot.time.js"></script>
+        <!-- MORRIS JS -->
+        <script type="text/javascript" src="~/resources/plugins/raphael.min.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/morris.min.js"></script>
+        <script type="text/javascript" src="~/resources/js/apps.js"></script>
+        <script type="text/javascript" src="~/resources/js/jquery.new.js"></script>
+        <script type="text/javascript" src="~/resources/js/demo-panel.js"></script>
+        <script type="text/javascript" src="~/resources/js/hr.js"></script>
+        <script type="text/javascript" src="~/resources/js/hr-validation.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/bootstrap-datetimepicker.min.js"></script>
+        <script type="text/javascript" src="~/resources/plugins/prism.js"></script>
+        <script type="text/javascript">
+            $('#closeButton').click(function () {
+                location.reload();
+            })
+        </script>
+</body>
+</html>
